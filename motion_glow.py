@@ -1,5 +1,5 @@
 import cv2
-
+from cv2utils.args import make_parser
 from cv2utils.camera import make_camera_with_args
 
 thresh = 5
@@ -16,7 +16,8 @@ def preprocess(frames, raw):
     diff[diff > thresh] = 1
     return cv2.add(cv2.cvtColor(diff, cv2.COLOR_GRAY2BGR) * raw, raw)
 
-camera, args = make_camera_with_args(log=False, fps=15, res=(1280, 720))
+parser = make_parser()
+camera, args = make_camera_with_args(parser=parser, log=False, fps=15, res=(1280, 720))
 camera.make_virtual_webcam(
     prepare=prepare,
     preprocess=preprocess,
