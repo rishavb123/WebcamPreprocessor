@@ -2,9 +2,6 @@ import cv2
 from cv2utils.args import make_parser
 from cv2utils.camera import make_camera_with_args
 
-thresh = 5
-
-
 def prepare(frame):
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frame = cv2.GaussianBlur(frame, (21, 21), 0)
@@ -20,5 +17,14 @@ def preprocess(frames, raw):
 
 
 parser = make_parser()
+parser.add_argument(
+    "-t",
+    "--threshold",
+    type=int,
+    default=15,
+    help="The threshold for the glow effect on motion",
+)
+thresh = parser.parse_args().threshold
+
 camera, args = make_camera_with_args(parser=parser, log=False, fps=15, res=(1280, 720))
 camera.make_virtual_webcam(prepare=prepare, preprocess=preprocess, frames_stored=2)
