@@ -24,7 +24,6 @@ parser.add_argument(
     default=15,
     help="The threshold for the glow effect on motion",
 )
-thresh = parser.parse_args().threshold
-
 camera, args = make_camera_with_args(parser=parser, log=False, fps=15, res=(1280, 720))
+thresh = args.threshold
 camera.make_virtual_webcam(prepare=prepare, preprocess=preprocess, frames_stored=2)
