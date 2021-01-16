@@ -17,7 +17,7 @@ def preprocess(frames, raw):
         ind = get_ind(i)
         img = cv2.addWeighted(img, 0.7, frames[ind], 0.3, 0)
     final = cv2.addWeighted(img, 0.9, raw, 0.1, 0)
-    final = cv2.cvtColor(final, cv2.COLOR_BGR2RGB)
+    # final = cv2.cvtColor(final, cv2.COLOR_BGR2RGB)
     return final
 
 
