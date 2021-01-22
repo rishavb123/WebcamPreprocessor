@@ -4,13 +4,6 @@ import mss
 def prepare(frame):
     h, w, _ = frame.shape
 
-    # black out hand
-    # wc = 6.5
-    # hc = 7.8
-    # ew = int(w*wc//10)
-    # sh = int(h*hc/10)
-    # frame[sh:,:ew,:] = 0
-
     for zone in black_out_zones:
         x, ex, y, ey = zone
         frame[int(h*y):int(h*ey), int(w*x):int(w*ex), 0:3] = 0
