@@ -1,3 +1,4 @@
+from cv2utils.args import make_parser
 from cv2utils.camera import make_camera_with_args, Camera
 import mss
 
@@ -17,7 +18,16 @@ black_out_zones = [
 ] 
 
 with mss.mss() as sct:
-    camera, args = make_camera_with_args(video=Camera.Monitor(sct, mon=3))
+    parser = make_parser()
+    parser.add_argument(
+        "-m",
+        "--monitor",
+        type=int,
+        default=0,
+        help="The monitor index to use"
+    )
+    args = parser.parse_args()
+    camera, args = make_camera_with_args(parser=parser, video=Camera.Monitor(sct, mon=args.monitor))
     camera.make_virtual_webcam(prepare=prepare, webcam_res=(1920, 1080))
 
 '''
