@@ -9,7 +9,6 @@ def prepare(frame):
 
 
 def preprocess(frames, raw):
-    img = frames[1]
     diff = cv2.absdiff(frames[0], frames[1])
     diff[diff <= thresh] = 0
     diff[diff > thresh] = 1
@@ -26,4 +25,4 @@ parser.add_argument(
 )
 camera, args = make_camera_with_args(parser=parser, log=False, fps=15, res=(1280, 720))
 thresh = args.threshold
-camera.make_virtual_webcam(prepare=prepare, preprocess=preprocess, frames_stored=2)
+camera.stream(prepare=prepare, preprocess=preprocess, frames_stored=2)
