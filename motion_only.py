@@ -12,8 +12,7 @@ def preprocess(frames, raw):
     diff = cv2.absdiff(frames[0], frames[1])
     diff[diff <= thresh] = 0
     diff[diff > thresh] = 1
-    return cv2.add(cv2.cvtColor(diff, cv2.COLOR_GRAY2BGR) * raw, raw)
-
+    return -cv2.cvtColor(diff, cv2.COLOR_GRAY2BGR) * raw
 
 parser = make_parser()
 parser.add_argument(
